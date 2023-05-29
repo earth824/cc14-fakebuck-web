@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 
 export default function Modal({ title, children, width = 27, open, onClose }) {
-  console.log('tee');
   return createPortal(
     <>
       {open && (

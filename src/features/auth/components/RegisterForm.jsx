@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+
 import RegisterInput from './RegisterInput';
 import validateRegister from '../validators/validate-register';
 import InputErrorMessage from './InputErrorMessage';
+import * as authService from '../../../api/auth-api';
+import { setAccessToken } from '../../../utils/localstorage';
 
 const initialInput = {
   firstName: '',
@@ -19,11 +23,19 @@ export default function RegisterForm() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitForm = e => {
-    e.preventDefault();
-    const result = validateRegister(input);
-    if (result) {
-      return setError(result);
+  const handleSubmitForm = async e => {
+    try {
+      e.preventDefault();
+      const result = validateRegister(input);
+      if (result) {
+        return setError(result);
+      }
+      setError({});
+
+      const res = await authService.register(input);
+      setAccessToken(res.data.accessToken);
+    } catch (err) {
+      toast.error('test errro');
     }
   };
 
