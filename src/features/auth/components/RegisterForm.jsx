@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import RegisterInput from './RegisterInput';
 import validateRegister from '../validators/validate-register';
 import InputErrorMessage from './InputErrorMessage';
-import * as authService from '../../../api/auth-api';
-import { setAccessToken } from '../../../utils/localstorage';
+import { registerAsync } from '../slice/auth-slice';
 
 const initialInput = {
   firstName: '',
@@ -15,9 +15,11 @@ const initialInput = {
   confirmPassword: ''
 };
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSuccess }) {
   const [input, setInput] = useState(initialInput);
   const [error, setError] = useState({});
+
+  const dispatch = useDispatch();
 
   const handleChangeInput = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -31,11 +33,11 @@ export default function RegisterForm() {
         return setError(result);
       }
       setError({});
-
-      const res = await authService.register(input);
-      setAccessToken(res.data.accessToken);
+      await dispatch(registerAsync(input)).unwrap();
+      toast.success('register successfully');
+      onSuccess();
     } catch (err) {
-      toast.error('test errro');
+      toast.error(err);
     }
   };
 
