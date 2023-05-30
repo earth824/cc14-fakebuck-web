@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
+import FriendPage from '../pages/FriendPage';
+import ProfilePage from '../pages/ProfilePage';
 import RedirectIfAuthenticated from '../features/auth/components/RedirectIfAuthenticated';
 import ProtectedRoute from '../features/auth/components/ProtectedRoute';
-import Header from '../layouts/Header';
+import Container from '../layouts/Container';
 
 const router = createBrowserRouter([
   {
@@ -17,14 +19,24 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      // <ProtectedRoute>
-      <Header />
-      // </ProtectedRoute>
-    )
-  },
-  {
-    path: '/friend',
-    element: <Header />
+      <ProtectedRoute>
+        <Container />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: '/',
+        element: <HomePage />
+      },
+      {
+        path: '/friend',
+        element: <FriendPage />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
+      }
+    ]
   }
 ]);
 

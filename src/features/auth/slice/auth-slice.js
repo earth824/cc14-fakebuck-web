@@ -5,7 +5,8 @@ import { setAccessToken } from '../../../utils/localstorage';
 const initialState = {
   isAuthenticated: false,
   error: null,
-  loading: false
+  loading: false,
+  user: null
 };
 
 export const registerAsync = createAsyncThunk(
@@ -23,6 +24,8 @@ export const registerAsync = createAsyncThunk(
 export const login = createAsyncThunk('auth/login', async input => {
   const res = await authService.login(input);
   setAccessToken(res.data.accessToken);
+  const resFetchMe = await authService.fetchMe();
+  return resFetchMe.data.user;
 });
 
 const authSlice = createSlice({
@@ -41,8 +44,9 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.loading = false;
       })
-      .addCase(login.fulfilled, state => {
+      .addCase(login.fulfilled, (state, action) => {
         state.isAuthenticated = true;
+        state.user = action.payload;
       })
 });
 
