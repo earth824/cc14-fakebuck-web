@@ -4,7 +4,6 @@ import InputErrorMessage from './InputErrorMessage';
 import useForm from '../../../hooks/useForm';
 import { useDispatch } from 'react-redux';
 import { login } from '../slice/auth-slice';
-import { toast } from 'react-toastify';
 
 export default function LoginForm() {
   const { input, handleChangeInput, error, handleSubmitForm } = useForm(
@@ -22,7 +21,6 @@ export default function LoginForm() {
       await dispatch(login(data)).unwrap();
     } catch (err) {
       console.log(err);
-      toast.error('Invalid email address or mobile number or password');
     }
   };
 
