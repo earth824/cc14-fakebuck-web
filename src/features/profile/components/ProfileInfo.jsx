@@ -1,7 +1,6 @@
 import Avatar from '../../../components/Avatar';
-import MeAction from './MeAction';
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ action }) {
   return (
     <div className="flex items-end gap-4 px-4 pb-4">
       <div className="-mt-8">
@@ -28,9 +27,7 @@ export default function ProfileInfo() {
         </div>
       </div>
 
-      <div className="mb-4">
-        <MeAction />
-      </div>
+      <div className="mb-4">{action}</div>
     </div>
   );
 }

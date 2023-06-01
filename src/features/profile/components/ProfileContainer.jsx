@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import CoverImage from './CoverImage';
 import ProfileInfo from './ProfileInfo';
 import ProfileWrapper from './ProfileWrapper';
+import useProfile from '../hooks/useProfile';
 
 export default function ProfileContainer() {
+  const { profileUserId } = useParams();
+  const { fetchProfile } = useProfile();
+
+  useEffect(() => {
+    fetchProfile(profileUserId);
+  }, [profileUserId, fetchProfile]);
+
   return (
     <ProfileWrapper
       cover={
