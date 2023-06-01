@@ -12,7 +12,7 @@ export default function ProfileContextProvider({ children }) {
   const [statusWithAuthenticatedUser, setStatusWithAuthenticatedUser] =
     useState('');
 
-  const fetchProfile = async profileUserId => {
+  const fetchProfile = useCallback(async profileUserId => {
     try {
       const res = await userService.getProfileUser(profileUserId);
       setProfileUser(res.data.user);
@@ -21,9 +21,7 @@ export default function ProfileContextProvider({ children }) {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  useCallback(fetchProfile, []);
+  }, []);
 
   return (
     <ProfileContext.Provider
