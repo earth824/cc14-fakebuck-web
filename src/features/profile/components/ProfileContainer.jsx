@@ -12,7 +12,7 @@ import ReceiverAction from './ReceiverAction';
 
 const actionMapping = {
   ME: <MeAction />,
-  FREIND: <FriendAction />,
+  FRIEND: <FriendAction />,
   UNKNOWN: <UnknownAction />,
   REQUESTER: <RequesterAction />,
   RECEIVER: <ReceiverAction />
