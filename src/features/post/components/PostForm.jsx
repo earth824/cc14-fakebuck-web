@@ -17,6 +17,7 @@ export default function PostForm({ createPost, onSuccess }) {
     }
 
     await createPost(message, file);
+
     onSuccess();
   };
 

@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 export default function Modal({ title, children, width = 27, open, onClose }) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [open]);
   return createPortal(
     <>
       {open && (
