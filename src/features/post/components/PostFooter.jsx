@@ -16,16 +16,16 @@ export default function PostFooter() {
       </div>
       <hr />
       <div className="flex py-1 gap-1">
-        <button className="py-1.5 w-full text-sm font-semibold text-gray-500 rounded hover:bg-gray-200">
+        <button className="py-1.5 w-full text-sm font-semibold rounded hover:bg-gray-200">
           <div className="flex gap-2 justify-center items-center">
             <ThumbsUpAltIcon className="fill-gray-500" />
-            <span>Like</span>
+            <span className="text-gray-500">Like</span>
           </div>
         </button>
         <button className="py-1.5 w-full text-sm font-semibold text-gray-500 rounded hover:bg-gray-200">
           <div className="flex gap-2 justify-center items-center">
             <MessageIcon className="fill-gray-500" />
-            <span>Comment</span>
+            <span className="text-gray-500">Comment</span>
           </div>
         </button>
       </div>
